@@ -22,8 +22,10 @@ $(call inherit-product-if-exists, vendor/lge/judypn/judypn-vendor.mk)
 DEVICE_PATH := device/lge/judypn
 
 # Overlays
-DEVICE_PACKAGE_OVERLAYS += \
-    $(DEVICE_PATH)/overlay
+PRODUCT_PACKAGES += \
+    JudypnFrameworksRes \
+    JudypnSystemUI  \
+    JudypnSettingsProvider
 
 # Properties
 TARGET_SYSTEM_PROP += $(DEVICE_PATH)/system.prop
