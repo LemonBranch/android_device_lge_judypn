@@ -27,7 +27,7 @@ TARGET_USES_YCRCB_VENUS_CAMERA_PREVIEW := true
 
 # Kernel
 BOARD_KERNEL_CMDLINE += androidboot.hardware=judypn
-TARGET_KERNEL_CONFIG := judypn_lao_com-perf_defconfig
+TARGET_KERNEL_CONFIG := aospa_judypn_defconfig
 
 # Partitions
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 113775689728
