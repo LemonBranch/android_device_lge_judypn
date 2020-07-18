@@ -19,6 +19,8 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 # Get non-open-source specific aspects
 $(call inherit-product-if-exists, vendor/lge/judypn/judypn-vendor.mk)
 
+TARGET_USERIMAGES_USE_F2FS := true
+
 DEVICE_PATH := device/lge/judypn
 
 # Overlays
