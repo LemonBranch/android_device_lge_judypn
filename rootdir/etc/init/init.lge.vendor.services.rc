@@ -1,6 +1,3 @@
-########################################
-# Application Manager ENABLE_UNINSTALL
-########################################
 service vendor.enable_uninstall  /system/vendor/bin/enable_uninstall.sh
     disabled
     oneshot
@@ -8,9 +5,6 @@ service vendor.enable_uninstall  /system/vendor/bin/enable_uninstall.sh
 on property:vold.post_fs_data_done=1
     start vendor.enable_uninstall
 
-########################################
-# resource parallel loading
-########################################
 service vendor.rmplb /vendor/bin/rmplb.sh
     user root
     group root
@@ -20,9 +14,6 @@ service vendor.rmplb /vendor/bin/rmplb.sh
 on property:sys.boot_completed=1
     start vendor.rmplb
 
-########################################
-# sim based property copy
-########################################
 service vendor.property_copy /system/vendor/bin/property_copy.sh
     class late_start
     disabled

@@ -1,4 +1,6 @@
-#!/vendor/bin/sh
+#! /vendor/bin/sh
+
+#
 # Copyright (c) 2017, The Linux Foundation. All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -28,8 +30,7 @@
 #
 #
 
-while [ "$registered" != "true" ]
-do
+while [ "$registered" != "true" ]; do
     sleep 0.1
-    registered="`getprop vendor.sys.listeners.registered`"
+    registered="$(getprop vendor.sys.listeners.registered)"
 done

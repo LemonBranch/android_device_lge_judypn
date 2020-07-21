@@ -1,5 +1,7 @@
-#!/vendor/bin/sh
-# Copyright (c) 2015,2018 The Linux Foundation. All rights reserved.
+#! /vendor/bin/sh
+
+#
+# Copyright (c) 2015-2018, The Linux Foundation. All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
@@ -26,22 +28,15 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 
-#
-# Function to start sensors for SSC enabled platforms
-#
-start_sensors()
-{
-    sscrpcd_status=`getprop init.svc.vendor.sensors`
-    chmod -h 664 /persist/sensors/sensors_settings
-    chown -h -R system.system /persist/sensors
-    chown -R system.system /mnt/vendor/sns/sensors/registry/registry/*
-    chown -h system.system /mnt/vendor/sns/sensors/registry/sns_version
-    start vendor.sensors.qti
+sscrpcd_status="$(getprop init.svc.vendor.sensors)"
 
-    # Only for SLPI
-    if [ -c /dev/msm_dsps -o -c /dev/sensors ] && [ -z "$sscrpcd_status" ]; then
-        start vendor.sensors
-    fi
-}
+chmod -h 664 /persist/sensors/sensors_settings
+chown -h -R system.system /persist/sensors
+chown -R system.system /mnt/vendor/sns/sensors/registry/registry/*
+chown -h system.system /mnt/vendor/sns/sensors/registry/sns_version
 
-start_sensors
+start vendor.sensors.qti
+
+if [ -c /dev/msm_dsps ] || [ -c /dev/sensors ] && [ -z "$sscrpcd_status" ]; then
+	start vendor.sensors
+fi
