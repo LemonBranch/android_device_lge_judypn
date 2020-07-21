@@ -1,4 +1,3 @@
-# none
 on property:sys.usb.config=none && property:sys.usb.configfs=1
     rm /config/usb_gadget/g1/configs/b.1/f1
     rm /config/usb_gadget/g1/configs/b.1/f2
@@ -12,7 +11,6 @@ on property:sys.usb.config=none && property:sys.usb.configfs=1
     rm /config/usb_gadget/g1/configs/b.2/f5
     rmdir /config/usb_gadget/g1/configs/b.2
 
-# adb
 on property:sys.usb.config=adb && property:sys.usb.configfs=1
     rm /config/usb_gadget/g1/configs/b.1/f1
     rm /config/usb_gadget/g1/configs/b.1/f2
@@ -31,7 +29,6 @@ on property:sys.usb.config=adb && property:sys.usb.configfs=1
     write /config/usb_gadget/g1/bDeviceSubClass 0
     write /config/usb_gadget/g1/bDeviceProtocol 0
 
-# accessory & audiosource
 on property:sys.usb.config=accessory && property:sys.usb.configfs=1
     rm /config/usb_gadget/g1/configs/b.1/f1
     rm /config/usb_gadget/g1/configs/b.1/f2
@@ -140,7 +137,6 @@ on property:sys.usb.config=accessory,audio_source,adb && property:sys.usb.config
     write /config/usb_gadget/g1/bDeviceSubClass 0
     write /config/usb_gadget/g1/bDeviceProtocol 0
 
-# midi
 on property:sys.usb.config=midi && property:sys.usb.configfs=1
     rm /config/usb_gadget/g1/configs/b.1/f1
     rm /config/usb_gadget/g1/configs/b.1/f2
@@ -177,7 +173,6 @@ on property:sys.usb.config=midi,adb && property:sys.usb.configfs=1
     write /config/usb_gadget/g1/bDeviceSubClass 0
     write /config/usb_gadget/g1/bDeviceProtocol 0
 
-# hset
 on property:sys.usb.config=hset && property:sys.usb.configfs=1
     start adbd
 
@@ -203,11 +198,6 @@ on property:sys.usb.ffs.ready=1 && property:sys.usb.config=hset && property:sys.
     write /config/usb_gadget/g1/UDC ${sys.usb.controller}
     setprop sys.usb.state ${sys.usb.config}
 
-################################################################################
-# QCOM
-################################################################################
-
-# qmicm
 on property:sys.usb.config=qmicm && property:sys.usb.configfs=1
     start adbd
 
@@ -264,7 +254,6 @@ on property:sys.usb.ffs.ready=1 && property:sys.usb.config=qmicm,adb && property
     write /config/usb_gadget/g1/UDC ${sys.usb.controller}
     setprop sys.usb.state ${sys.usb.config}
 
-# diag,serial_cdev,rmnet,dpl
 on property:sys.usb.config=diag,serial_cdev,rmnet,dpl && property:sys.usb.configfs=1
     write /config/usb_gadget/g1/configs/b.1/strings/0x409/configuration "diag_dun_rmnet_dpl"
     rm /config/usb_gadget/g1/configs/b.1/f1
@@ -319,11 +308,6 @@ on property:sys.usb.ffs.ready=1 && property:sys.usb.config=diag,serial_cdev,rmne
     write /config/usb_gadget/g1/UDC ${sys.usb.controller}
     setprop sys.usb.state ${sys.usb.config}
 
-################################################################################
-# LAO
-################################################################################
-
-# boot
 on property:sys.usb.config=boot && property:sys.usb.configfs=1
     write /config/usb_gadget/g1/configs/b.1/strings/0x409/configuration "boot"
     rm /config/usb_gadget/g1/configs/b.1/f1
@@ -365,11 +349,9 @@ on property:sys.usb.ffs.ready=1 && property:sys.usb.config=boot,adb && property:
     symlink /config/usb_gadget/g1/functions/acm.0 /config/usb_gadget/g1/configs/b.1/f1
     symlink /config/usb_gadget/g1/functions/diag.diag /config/usb_gadget/g1/configs/b.1/f2
     symlink /config/usb_gadget/g1/functions/ffs.adb /config/usb_gadget/g1/configs/b.1/f3
-#   exec u:r:lge-usb-sh:s0 -- /vendor/bin/init.lge.usb.lao.sh ${sys.usb.config}
     write /config/usb_gadget/g1/UDC ${sys.usb.controller}
     setprop sys.usb.state ${sys.usb.config}
 
-# charge_only
 on property:sys.usb.config=charge_only && property:sys.usb.configfs=1
     write /config/usb_gadget/g1/configs/b.1/strings/0x409/configuration "charge"
     rm /config/usb_gadget/g1/configs/b.1/f1
@@ -407,7 +389,6 @@ on property:sys.usb.ffs.ready=1 && property:sys.usb.config=charge_only,adb && pr
     write /config/usb_gadget/g1/UDC ${sys.usb.controller}
     setprop sys.usb.state ${sys.usb.config}
 
-# mtp
 on property:sys.usb.config=mtp && property:sys.usb.configfs=1
     rm /config/usb_gadget/g1/configs/b.1/f1
     rm /config/usb_gadget/g1/configs/b.1/f2
@@ -436,7 +417,6 @@ on property:sys.usb.ffs.ready=1 && property:sys.usb.config=mtp,adb && property:s
     rmdir /config/usb_gadget/g1/configs/b.2
     exec u:r:lge-usb-sh:s0 -- /vendor/bin/init.lge.usb.lao.sh ${sys.usb.config}
 
-# ptp
 on property:sys.usb.config=ptp && property:sys.usb.configfs=1
     rm /config/usb_gadget/g1/configs/b.1/f1
     rm /config/usb_gadget/g1/configs/b.1/f2
@@ -465,7 +445,6 @@ on property:sys.usb.config=ptp,adb && property:sys.usb.configfs=1
     rmdir /config/usb_gadget/g1/configs/b.2
     exec u:r:lge-usb-sh:s0 -- /vendor/bin/init.lge.usb.lao.sh ${sys.usb.config}
 
-# rndis
 on property:vendor.usb.tethering=true
     write /sys/class/net/rndis0/queues/rx-0/rps_cpus ${vendor.usb.rps_mask}
 
@@ -512,7 +491,6 @@ on property:sys.usb.ffs.ready=1 && property:sys.usb.config=rndis,acm,diag,adb &&
     write /config/usb_gadget/g1/UDC ${sys.usb.controller}
     setprop sys.usb.state rndis,adb
 
-# cdrom_storage
 on property:sys.usb.config=cdrom_storage && property:sys.usb.configfs=1
     rm /config/usb_gadget/g1/configs/b.1/f1
     rm /config/usb_gadget/g1/configs/b.1/f2
@@ -548,7 +526,6 @@ on property:sys.usb.ffs.ready=1 && property:sys.usb.config=cdrom_storage,adb && 
     write /config/usb_gadget/g1/UDC ${sys.usb.controller}
     setprop sys.usb.state ${sys.usb.config}
 
-# ncm
 on property:sys.usb.config=ncm && property:sys.usb.configfs=1
     write /config/usb_gadget/g1/configs/b.1/strings/0x409/configuration "ncm"
     rm /config/usb_gadget/g1/configs/b.1/f1
@@ -596,19 +573,10 @@ on property:sys.usb.ffs.ready=1 && property:sys.usb.config=ncm,adb && property:s
     write /config/usb_gadget/g1/UDC ${sys.usb.controller}
     setprop sys.usb.state ${sys.usb.config}
 
-################################################################################
-# VZW
-################################################################################
-
 on post-fs-data && property:ro.vendor.lge.build.target_operator=VZW
     write /config/usb_gadget/g1/functions/mass_storage.0/lun.0/cdrom 1
     write /config/usb_gadget/g1/functions/mass_storage.0/lun.0/file /vendor/etc/usbautorun.iso
 
-################################################################################
-# FACTORY
-################################################################################
-
-# factory
 on property:sys.usb.config=factory2 && property:sys.usb.configfs=1
     setprop vendor.lge.usb.configfs ${sys.usb.configfs}
 
@@ -635,7 +603,6 @@ on property:sys.usb.config=factory && property:vendor.lge.usb.configfs=1
     write /config/usb_gadget/g1/UDC ${sys.usb.controller}
     setprop sys.usb.state ${sys.usb.config}
 
-# factory2
 on property:sys.usb.config=factory2 && property:sys.usb.configfs=1
     setprop vendor.lge.usb.configfs ${sys.usb.configfs}
 
@@ -686,7 +653,6 @@ on property:sys.usb.config=factory2 && property:vendor.lge.usb.configfs=1 && pro
     write /config/usb_gadget/g1/UDC ${sys.usb.controller}
     setprop sys.usb.state ${sys.usb.config}
 
-# factory,adb
 on property:sys.usb.config=factory,adb && property:sys.usb.configfs=1
     setprop vendor.lge.usb.configfs ${sys.usb.configfs}
 

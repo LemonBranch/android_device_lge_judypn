@@ -50,10 +50,6 @@ on fs
     chmod 0771 /mnt/vendor/eri
     restorecon_recursive /mnt/vendor/eri
 
-    # We use reservedsize option in fstab instead of tune2fs. No more use tune2fs
-    # Executing tune2fs to reserve some region in /data.(40MB)
-    # exec /system/bin/tune2fs -u system -r 10240 /dev/block/bootdevice/by-name/userdata
-
 on post-fs
     chown system system /vendor/mpt
     chmod 0775 /vendor/mpt
@@ -92,7 +88,6 @@ on post-fs
 
     start sreadahead
 
-# enable & disable crash handler, rtb & trace event through property
 on property:persist.vendor.lge.service.crash.enable=*
     restart service-crash
 
@@ -105,7 +100,6 @@ service sreadahead /vendor/bin/treadahead
     disabled
     seclabel u:r:sreadahead:s0
 
-# make a diecision whether sreadahead would be performed or not.
 service sreadahead-check /vendor/bin/sreadahead_check
     class main
     user root
@@ -115,13 +109,10 @@ service sreadahead-check /vendor/bin/sreadahead_check
 
 on property:persist.vendor.lge.service.crash.enable=1
     start console
-    # rtb filter
     write /sys/module/msm_rtb/parameters/filter 0x237
 
-    # ftrace
     write /sys/kernel/debug/tracing/tracing_on 1
 
-    #enble FTRACE for softirq events
     write /sys/kernel/debug/tracing/events/irq/enable 1
     write /sys/kernel/debug/tracing/events/irq/filter 1
     write /sys/kernel/debug/tracing/events/irq/softirq_entry/enable 1
@@ -129,7 +120,6 @@ on property:persist.vendor.lge.service.crash.enable=1
     write /sys/kernel/debug/tracing/events/irq/softirq_raise/enable 1
     write /sys/kernel/debug/tracing/events/irq/irq_handler_entry/enable 1
 
-    #enble FTRACE for Workqueue events
     write /sys/kernel/debug/tracing/events/workqueue/enable 1
     write /sys/kernel/debug/tracing/events/workqueue/filter 1
     write /sys/kernel/debug/tracing/events/workqueue/workqueue_activate_work/enable 1
@@ -137,7 +127,6 @@ on property:persist.vendor.lge.service.crash.enable=1
     write /sys/kernel/debug/tracing/events/workqueue/workqueue_execute_start/enable 1
     write /sys/kernel/debug/tracing/events/workqueue/workqueue_queue_work/enable 1
 
-    # schedular
     write /sys/kernel/debug/tracing/events/sched/sched_cpu_hotplug/enable 1
     write /sys/kernel/debug/tracing/events/sched/sched_cpu_load/enable 1
     write /sys/kernel/debug/tracing/events/sched/sched_enq_deq_task/enable 1
@@ -148,25 +137,16 @@ on property:persist.vendor.lge.service.crash.enable=1
     write /sys/kernel/debug/tracing/events/sched/sched_wakeup/enable 1
     write /sys/kernel/debug/tracing/events/sched/sched_wakeup_new/enable 1
 
-    # power
     write /sys/kernel/debug/tracing/events/msm_low_power/enable 1
 
-    # scm call
     write /sys/kernel/debug/tracing/events/scm/scm_call_start/enable 1
     write /sys/kernel/debug/tracing/events/scm/scm_call_end/enable 1
 
-    # size
     write /sys/kernel/debug/tracing/buffer_size_kb 16384
 
 on property:persist.vendor.lge.service.crash.enable=0
-    # rtb filter
     write /sys/module/msm_rtb/parameters/filter 0
 
-    # ftrace
     write /sys/kernel/debug/tracing/tracing_on 0
 
-    # size
     write /sys/kernel/debug/tracing/buffer_size_kb 0
-
-    # free buffer
-    #write /sys/kernel/debug/tracing/free_buffer

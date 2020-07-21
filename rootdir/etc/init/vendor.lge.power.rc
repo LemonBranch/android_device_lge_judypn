@@ -1,7 +1,7 @@
+#
 # Copyright (c) 2017, LG Eletronics. All rights reserved.
 #
 
-# setting owner
 on boot
    chown root system /sys/devices/platform/lge-unified-nodes/thermald_iusb
    chown root system /sys/devices/platform/lge-unified-nodes/thermald_ibat
@@ -26,25 +26,21 @@ on boot
    chown system system /sys/devices/platform/lge-unified-nodes/support_fastpl
    chown system system /sys/devices/platform/lge-unified-nodes/support_fastchg
 
-# battery fake mode
 on property:persist.vendor.lge.service.fakebatt=1
    write /sys/devices/platform/lge-unified-nodes/fake_battery 1
 on property:persist.vendor.lge.service.fakebatt=0
    write /sys/devices/platform/lge-unified-nodes/fake_battery 0
 
-# usb current max mode property
 on property:persist.vendor.lge.service.usbcurrentmax=1
    write /sys/devices/platform/lge-unified-nodes/fake_sdpmax 1
 on property:persist.vendor.lge.service.usbcurrentmax=0
    write /sys/devices/platform/lge-unified-nodes/fake_sdpmax 0
 
-# hvdcp fake mode
 on property:persist.vendor.lge.service.hvdcpfakemode=1
    write /sys/devices/platform/lge-unified-nodes/fake_hvdcp 1
 on property:persist.vendor.lge.service.hvdcpfakemode=0
    write /sys/devices/platform/lge-unified-nodes/fake_hvdcp 0
 
-# llk mode
 on property:persist.vendor.lge.sys.store_demo_enabled=1
    write /sys/devices/platform/lge-unified-nodes/charging_showcase 1
 on property:persist.vendor.lge.sys.store_demo_enabled=0
@@ -92,7 +88,6 @@ on chargerlogo
    symlink /config/usb_gadget/g1/functions/hid.charge /config/usb_gadget/g1/configs/b.1/f1
    write /config/usb_gadget/g1/UDC "a600000.dwc3"
 
-# Qnovo soluion
 on post-fs-data
    chown system system /dev/triton:io
    chmod 664 /dev/triton:io
@@ -174,13 +169,11 @@ service vendor.qni_log /system/vendor/bin/qni -d /mnt/vendor/power -l /data/vend
    socket qnibsd stream 660 qni system
    disabled
 
-# Hard Reset Type: 8-DVDD_HARD_RESET, 9-XVDD_HARD_RESET
 on property:persist.vendor.lge.hardreset=0
    write /sys/module/qpnp_power_on/parameters/s2_type 8
 on property:persist.vendor.lge.hardreset=1
    write /sys/module/qpnp_power_on/parameters/s2_type 9
 
-# LGE triton
 service vendor.triton /vendor/bin/triton
    class main
    socket triton-client stream 660 system system
@@ -203,12 +196,6 @@ on property:sys.boot_completed=1
    chmod 664 /sys/class/power/triton/debug
 
 on boot
-#   chown system system /proc/lge_power/psfeature/vfps
-#   chmod 664 /proc/lge_power/psfeature/vfps
-#   chown system system /proc/lge_power/psfeature/vfps_fcnt
-#   chmod 664 /proc/lge_power/psfeature/vfps_fcnt
-#   chown system system /proc/lge_power/psfeature/vfps_ratio
-#   chmod 664 /proc/lge_power/psfeature/vfps_ratio
    chown system system /sys/class/power/fbcn/fbcn_en
    chmod 664 /sys/class/power/fbcn/fbcn_en
    chown system system /sys/class/power/fbcn/fbcn_i

@@ -1,3 +1,4 @@
+#
 # Copyright (c) 2011, Code Aurora Forum. All rights reserved.
 # Copyright (c) 2011-2012, LG Electronics Inc. All rights reserved.
 #
@@ -26,28 +27,24 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 
-# pm debug mask enable(clock/resume irq)
 on boot
    write /sys/kernel/debug/clk/debug_suspend 1
    write /sys/module/msm_show_resume_irq/parameters/debug_mask 1
-# printk log level
+
    write /proc/sys/kernel/printk "7 6 1 7"
 
-# LGE gbmd
 service vendor.gbmd /vendor/bin/gbmd
    class main
    socket gbm-client stream 660 system system
    user system
    group system
 
-# LGE prmd
 service vendor.prmd /vendor/bin/prmd
    class main
    socket prm-client stream 660 system system
    user system
    group system
 
-# LG Hiddenmenu smpl_count service
 service vendor.smpl_count /vendor/bin/smpl_count
    class main
    user root

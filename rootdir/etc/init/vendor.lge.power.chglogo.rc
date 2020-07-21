@@ -1,4 +1,3 @@
-# chargerlogo
 on chargerlogo
     trigger early-fs
     trigger fs
@@ -17,7 +16,6 @@ on chargerlogo_exec
     exec u:r:chargerlogo:s0 -- /vendor/bin/chargerlogo
     trigger chargerlogo_after
 
-# WA chargerlogo kill
 on chargerlogo_after
     exec u:r:chargerlogo:s0 -- /vendor/bin/chargerlogo
     trigger chargerlogo_after
