@@ -114,7 +114,11 @@ echo 10 > /sys/class/devfreq/soc:qcom,mincpubw/polling_interval
 echo 0-1 > /dev/cpuset/background/cpus
 echo 0-2 > /dev/cpuset/system-background/cpus
 echo 0-3 > /dev/cpuset/restricted/cpus
-echo 0-3,6-7 > /dev/cpuset/foreground/cpus
+echo 0-3,5-6 > /dev/cpuset/foreground/cpus
+
+echo 1 > /dev/stune/foreground/schedtune.prefer_idle
+echo 5 > /dev/stune/top-app/schedtune.boost
+echo 1 > /dev/stune/top-app/schedtune.prefer_idle
 
 echo 1000 > /dev/blkio/blkio.weight
 echo 200 > /dev/blkio/background/blkio.weight
