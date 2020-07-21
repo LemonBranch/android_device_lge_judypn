@@ -142,6 +142,8 @@ echo 0 > /sys/module/lpm_levels/parameters/sleep_disabled
 echo 100 > /proc/sys/vm/swappiness
 echo 120 > /proc/sys/vm/watermark_scale_factor
 
+setprop vendor.powerhal.init 1
+
 setprop vendor.post_boot.parsed 1
 
 if [ -f /data/prebuilt/AdrenoTest.apk ]; then
