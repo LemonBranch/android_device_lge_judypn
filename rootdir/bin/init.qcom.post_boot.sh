@@ -63,8 +63,6 @@ echo "0:1766400 4:902400" > /sys/module/cpu_boost/parameters/sub_boost_freq
 echo 160 > /sys/module/cpu_boost/parameters/input_boost_ms
 echo 825000 > /sys/devices/system/cpu/cpu4/cpufreq/scaling_min_freq
 
-echo 1 > /sys/module/lowmemorykiller/parameters/oom_reaper
-
 for cpubw in /sys/class/devfreq/*qcom,cpubw*; do
 	echo "bw_hwmon" > "$cpubw/governor"
 	echo 50 > "$cpubw/polling_interval"
