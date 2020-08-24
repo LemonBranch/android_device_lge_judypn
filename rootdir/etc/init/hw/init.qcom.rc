@@ -444,6 +444,19 @@ on property:sys.boot_completed=1
 
     swapon_all /vendor/etc/fstab.${ro.boot.hardware}
 
+    write /sys/block/sda/queue/read_ahead_kb 64
+    write /sys/block/sda/queue/nr_requests 128
+    write /sys/block/sdb/queue/read_ahead_kb 64
+    write /sys/block/sdb/queue/nr_requests 128
+    write /sys/block/sdc/queue/read_ahead_kb 64
+    write /sys/block/sdc/queue/nr_requests 128
+    write /sys/block/sdd/queue/read_ahead_kb 64
+    write /sys/block/sdd/queue/nr_requests 128
+    write /sys/block/sde/queue/read_ahead_kb 64
+    write /sys/block/sde/queue/nr_requests 128
+    write /sys/block/sdf/queue/read_ahead_kb 64
+    write /sys/block/sdf/queue/nr_requests 128
+
 on property:persist.vendor.radio.atfwd.start=false
     stop vendor.atfwd
 
