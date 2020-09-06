@@ -214,6 +214,8 @@ on boot
 
     mkdir /mnt/vendor/persist/hvdcp_opti 0770 root system
 
+    write /sys/power/mem_sleep "s2idle"
+
 on property:ro.boot.vendor.lge.sim_num=2
     setprop persist.radio.multisim.config dsds
 
